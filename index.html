@@ -1,0 +1,143 @@
+<!-- recommendation.html -->
+<h1>Recommendation</h1>
+<form action="{% url 'recommendation' %}" method="GET">
+  <label for="designer">Designer:</label>
+  <select id="designer" name="designer">
+    {% for designer in designers %}
+      <option value="{{ designer.name }}">{{ designer.name }}</option>
+    {% endfor %}
+  </select><br>
+  <label for="color">Color:</label>
+  <select id="color" name="color">
+    {% for color in colors %}
+      <option value="{{ color.name }}">{{ color.name }}</option>
+    {% endfor %}
+  </select><br>
+  <label for="jewelry">Jewelry:</label>
+  <select id="jewelry" name="jewelry">
+    {% for jewelry in jewelries %}
+      <option value="{{ jewelry.name }}">{{ jewelry.name }}</option>
+    {% endfor %}
+  </select><br>
+  <label for="brand">Brand:</label>
+  <select id="brand" name="brand">
+    {% for brand in brands %}
+      <option value="{{ brand.name }}">{{ brand.name }}</option>
+    {% endfor %}
+  </select><br>
+  <label for="price">Price:</label>
+  <select id="price" name="price">
+    {% for price in prices %}
+      <option value="{{ price.name }}">{{ price.name }}</option>
+    {% endfor %}
+  </select><br>
+  <input type="submit" value="Recommend">
+</form>
+
+{% if coords %}
+  {% for coord in coords %}
+    <div>
+      <img src="{{ coord.image.url }}" alt="{{ coord.name }}">
+      <p>{{ coord.name }}</p>
+      <p>{{ coord.description }}</p>
+    </div>
+  {% endfor %}
+{% else %}
+  <p>No coords found.</p>
+{% endif %}
+<!-- recommend_designer.html -->
+<h1>Personal Designer Recommendation</h1>
+<form method="post" action="{% url 'recommend_designer' %}">
+  {% csrf_token %}
+  <label for="name">Name:</label>
+  <input type="text" id="name" name="name" required><br>
+  <label for="age">Age:</label>
+  <input type="number" id="age" name="age" required><br>
+  <label for="gender">Gender:</label>
+  <select id="gender" name="gender" required>
+    <option value="M">Male</option>
+    <option value="F">Female</option>
+  </select><br>
+  <label for="preferred_color">Preferred Color:</label>
+  <input type="color" id="preferred_color" name="preferred_color" required><br>
+  <label for="preferred_jewelry">Preferred Jewelry:</label>
+  <select id="preferred_jewelry" name="preferred_jewelry" required>
+    <option value="necklace">Necklace</option>
+    <option value="earrings">Earrings</option>
+    <option value="bracelet">Bracelet</option>
+  </select><br>
+  <label for="preferred_brand">Preferred Brand:</label>
+  <select id="preferred_brand" name="preferred_brand" required>
+      {% for brand in brands %}
+        <option value="{{ brand.name }}">{{ brand.name }}</option>
+      {% endfor %}
+    </select><br>
+  <label for="price_range">Price Range:</label>
+  <select id="price_range" name="price_range" required>
+    <option value="low">$0 - $50</option>
+    <option value="medium">$50 - $100</option>
+    <option value="high">$100+</option>
+  </select><br>
+  <input type="submit" value="Get Recommendations">
+</form>
+<!-- recommended_items.html -->
+{% if items %}
+  <h2>Recommended Items</h2>
+  <div class="item-container">
+    {% for item in items %}
+      <div class="item">
+        <img src="{{ item.image.url }}" alt="{{ item.name }}">
+        <p class="name">{{ item.name }}</p>
+        <p class="designer">{{ item.designer.name }}</p>
+        <p class="price">{{ item.price }}</p>
+      </div>
+    {% endfor %}
+  </div>
+{% else %}
+  <p>No items found.</p>
+{% endif %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>로그인</title>
+	<link rel="stylesheet" href="style.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script>
+		$(document).ready(function(){
+			$("#login-form").submit(function(e){
+				e.preventDefault();
+				var email = $("#email").val();
+				var password = $("#password").val();
+				$.ajax({
+					type: "POST",
+					url: "login.php",
+					data: {email:email, password:password},
+					success: function(response){
+						if(response == "success"){
+							window.location.href = "dashboard.php";
+						}
+						else{
+							$("#message").html(response);
+						}
+					}
+				});
+			});
+		});
+	</script>
+</head>
+<body>
+	<div class="login-box">
+		<h1>로그인</h1>
+		<form id="login-form" method="POST">
+			<label for="email">이메일</label>
+			<input type="text" id="email" name="email" required>
+
+			<label for="password">비밀번호</label>
+			<input type="password" id="password" name="password" required>
+
+			<input type="submit" value="로그인">
+		</form>
+		<div id="message"></div>
+	</div>
+</body>
+</html>
