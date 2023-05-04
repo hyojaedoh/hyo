@@ -1,0 +1,99 @@
+/* 전체 레이아웃 스타일링 */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
+}
+
+/* 로고 이미지 스타일링 */
+.logo-img {
+  max-width: 200px;
+  height: auto;
+}
+
+/* 메인 네비게이션 스타일링 */
+.main-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff;
+  border-bottom: 1px solid #ddd;
+  padding: 10px 20px;
+}
+
+.main-nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+.main-nav li {
+  margin-right: 20px;
+}
+
+.main-nav li:last-child {
+  margin-right: 0;
+}
+
+.main-nav a {
+  text-decoration: none;
+  color: #333;
+  font-size: 16px;
+}
+
+.main-nav a:hover {
+  color: #ff6600;
+}
+
+/* 로그인 폼 스타일링 */
+.login-form {
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.login-form h2 {
+  margin: 0;
+  padding-bottom: 10px;
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.login-form label {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+}
+
+.login-form input[type="text"],
+.login-form input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  margin-bottom: 20px;
+  font-size: 16px;
+}
+
+.login-form button[type="submit"] {
+  background-color: #ff6600;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.login-form button[type="submit"]:hover {
+  background-color: #e55e00;
+}
